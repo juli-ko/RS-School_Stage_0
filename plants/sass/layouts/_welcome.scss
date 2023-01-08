@@ -1,0 +1,16 @@
+.welcome {
+    background-color: $color-background;
+}
+
+.welcome__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 60px 0 60px 0;
+}
+
+.welcome__content {
+    padding-left: 222px;
+    padding-right: 10px;
+
+}

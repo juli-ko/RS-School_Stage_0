@@ -1,9 +1,69 @@
 html {
     font-size: 10px;
+    scroll-behavior: smooth; 
 }
 
 
 body {
     font-size: 2rem;
     font-family: 'Inter', Verdana, sans-serif;
+    color: $color-text;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 35px;
+    
+}
+
+h1 {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 45px;
+    line-height: 50px;
+    color: $color-heading;
+    margin-top: 0;
+    margin-bottom: 45px;
+}
+.text__primary {
+    color: $color-primary;
+}
+
+.text_secondary{
+    color: $color-aditional;
+}
+
+h2 {
+    font-family: $font-aditional;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 52px;
+}
+
+h3 {
+    color: $color-aditional;
+    text-align: center;
+    padding: 8px 0 13px 0;
+    margin: 0;
+    font-size: 20px;
+    line-height: 20px;
+}
+.logo {
+    font-family: $font-aditional ;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.6rem;
+    line-height: 2.1rem;
+    color: $color-links;
+    text-decoration: none;
+    padding-bottom: 15px;
+    &:hover {
+        color: $color-aditional;
+        @extend %transition
+    }
+    display: inline-flex;
+    align-items: center;
+}
+.logo-name {
+    padding-top: 10px;
 }

@@ -7,10 +7,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inika:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./sass/style.css">
     <title>Plants</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="./img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
 </head>
 <body>
     <header class="header">
-        <div class="wrapper">
+        <div class="wrapper header__wrapper">
             <a href="#" class="logo">
                 <object type="image/svg+xml" data="./img/header/logo_vector.svg" class="logo-object">
                     Your browser does not support SVG
@@ -19,123 +24,158 @@
             </a>
             <nav class="header_navigation">
                 <ul class="navigation">
-                    <li class="navigation__element element_colored">Home</li>
-                    <li class="navigation__element">About us</li>
-                    <li class="navigation__element">Service</li>
-                    <li class="navigation__element">Price</li>
-                    <li class="navigation__element">Contacts</li>
+                    <li class="navigation__element"><a href="#home">Home</a></li>
+                    <li class="navigation__element"><a href="#about">About us</a></li>
+                    <li class="navigation__element"><a href="#service">Service</a></li>
+                    <li class="navigation__element"><a href="#price">Price</a></li>
+                    <li class="navigation__element"><a href="#contacts">Contacts</a></li>
                 </ul>
             </nav>
         </div>
     </header>
     <main>
-        <section class="welcome">
-            <div class="wrapper">
-                <img class="welcome-picture" src="./img/welcome/leafs.png" alt="leaf">
+        <section class="welcome" id="home">
+            <div class="wrapper welcome__wrapper">
+                <img class="welcome-picture" src="./img/welcome/leafs.png" alt="leaf" width="450">
                 <div class="welcome__content">
-                    <h1>We grow plants and give you oxygen</h1>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                    <button class="button button_bordered">LEARN MORE</button>
+                    <h1 class="text">We grow <span class="text text__primary">plants</span> and give you oxygen</h1>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the  industry's standard dummy text ever since the 1500s.</p>
+                    <button class="button button__bordered">LEARN MORE</button>
                 </div>
             </div>
         </section>
-            <section class="about">
-            <div class="wrapper">
-                <h2>We are professional experienced gardeners</h2>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </p>
-                <img src="./img/about/houseplant 1.png" alt="houseplant">
+            <section class="about" id="about">
+            <div class="wrapper about__wrapper">
+                <div class="about__content">
+                    <h2 class="text text__primary">We are <span class="text text_secondary">professional experienced</span> gardeners</h2>
+                    <p class="about_text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </p>
+                </div>
+                <img src="./img/about/houseplant.png" alt="houseplant" width="464">
             </div>
         </section>
-        <section class="service">
+        <section class="service" id="service">
             <div class="wrapper">
-                <h2>Service and our projects</h2>
-                <div class="service_btns">
-                    <button class="button">Gardens</button>
-                    <button class="button">Lawn</button>
-                    <button class="button">Planting</button>
+                <div class="service__top">
+                    <h2 class="text text__primary">Service and our projects</h2>
+                    <div class="service_btns">
+                        <button class="button">Gardens</button>
+                        <button class="button">Lawn</button>
+                        <button class="button">Planting</button>
+                    </div>
                 </div>
                 <div class="layout-3-column service-wrapper">
                     <article class="service__item">
                         <img src="./img/service/first.png" alt="service item">
-                        <h3>Garden care</h3>
-                        <p>Lorem Ipsum has been the industry</p>
+                        <div class="service__item service__item__bordered">
+                            <h3>Garden care</h3>
+                            <p class="service__text">Lorem Ipsum has been the industry</p>
+                        </div>
                     </article>
                     <article class="service__item">
-                        <img src="./img/service/first (1).png" alt="service item">
-                        <h3>Planting</h3>
-                        <p>Lorem Ipsum has been the industry</p>
+                        <img src="./img/service/first_1.png" alt="service item">
+                        <div class="service__item service__item__bordered">
+                            <h3>Planting</h3>
+                            <p class="service__text">Lorem Ipsum has been the industry</p>
+                        </div>
                     </article>
                     <article class="service__item">
-                        <img src="./img/service/first (2).png" alt="service item">
-                        <h3>Lawn care</h3>
-                        <p>Lorem Ipsum has been the industry</p>
+                        <img src="./img/service/first_2.png" alt="service item">
+                        <div class="service__item service__item__bordered">
+                            <h3>Lawn care</h3>
+                            <p class="service__text">Lorem Ipsum has been the industry</p>
+                        </div>
                     </article>
                     <article class="service__item">
-                        <img src="img/service/first (3).png" alt="service item">
-                        <h3>Planting</h3>
-                        <p>Lorem Ipsum has been the industry</p>
+                        <img src="img/service/first_3.png" alt="service item">
+                        <div class="service__item service__item__bordered">
+                            <h3>Planting</h3>
+                            <p class="service__text">Lorem Ipsum has been the industry</p>
+                        </div>
                     </article>
                     <article class="service__item">
-                        <img src="img/service/first (4).png" alt="service item">
-                        <h3>Garden care</h3>
-                        <p>Lorem Ipsum has been the industry</p>
+                        <img src="img/service/first_4.png" alt="service item">
+                        <div class="service__item service__item__bordered">
+                            <h3>Garden care</h3>
+                            <p class="service__text">Lorem Ipsum has been the industry</p>
+                        </div>
                     </article>
                     <article class="service__item">
-                        <img src="img/service/first (5).png" alt="service item">
-                        <h3>Planting</h3>
-                        <p>Lorem Ipsum has been the industry</p>
-                    </article>
+                        <img src="img/service/first_5.png" alt="service item">
+                        <div class="service__item service__item__bordered">
+                            <h3>Planting</h3>
+                            <p class="service__text">Lorem Ipsum has been the industry</p>
+                                
+                        </div>
+                    </article>   
                 </div>
             </div>
         </section>
-        <section class="prices">
-            <div class="wrapper">
+        <section class="prices" id="price">
+            <div class="wrapper prices__wrapper">
                 <div class="right-side">
                     <h2>Prices</h2>
                     <div class="price__btns">
-                        <button>Basic</button>
-                        <button>Standard</button>
-                        <button>Pro care</button>
+                        <button class="button-acordeon">Basics<span class="ico ico__light"></span></button>
+                        <button class="button-acordeon">Standard<span class="ico ico__light"></span></button>
+                        <button class="button-acordeon">Pro care<span class="ico ico__light"></span></button>
                     </div>
                 </div>
                 <div class="left-side">
-                    <h2>Our best gardeners are ready to help you</h2>
-                    <button class="button">Contact us</button>
+                    <h2>Our best <span class="text text__primary">gardeners</span> are ready to help you</h2>
+                    <button class="button button_light">Contact us</button>
+                    <img src="img/prices/leafs_1.png" alt="leaf" width="160">
                 </div>
             </div>
         </section> 
-        <section class="contacts">
-            <div class="wrapper">
-                <div class="contact__woman"><img src="./img/contacts/contact_woman 1.png" alt="woman"></div>
-                <h2>Contact us</h2> 
-                <div class="contact__city"><input type="radio" name="City" placeholder="City"> </div>
+        <section class="contacts" id="contacts" >
+            <div class="wrapper contacts__wrapper">
+                <div class="contact__woman"><img src="./img/contacts/contact_woman.png" alt="woman" width="400"></div>
+                <div class="contact__header">
+                    <h2 class="text text__primary">Contact us</h2>
+                </div> 
+                <div class="selector">
+                    <select name="format">
+                        <option selected disabled>City</option>
+                        <option value="Sherrill, NY">Sherrill, NY</option>
+                        <option value="New York City">New York City</option>
+                        <option value="Canandaigua, NY">Canandaigua, NY</option>
+                        <option value="Yonkers, NY">Yonkers, NY</option>
+                    </select>
+                </div>
             </div>
         </section>     
     </main>
     <footer>
-        <div class="wrapper">
+        <div class="wrapper footer_wrapper">
             <div class="layout-3-column">
                 <div class="footer-development">
                     <span>©</span>
                     <span>2022</span>
-                    <a href=" " class="footer-link">github</a>
+                    <a href="https://github.com/juli-ko" class="footer-link">github</a>
                 </div>
-                <a href=" " class="footer-link">Rolling Scopes School</a>
+                <a href="https://rs.school/js-stage0/" class="footer-link footer_center">Rolling Scopes School</a>
                 <div class="footer-social">
                     <a href="#" class="logo">
                         <object type="image/svg+xml" data="./img/footer/inst.svg" class="logo-social">
                             Your browser does not support SVG
                         </object>
+                    </a>
+                    <a href="#" class="logo">
                         <object type="image/svg+xml" data="./img/footer/fb.svg" class="logo-social">
                             Your browser does not support SVG
                         </object>
+                    </a>
+                    <a href="#" class="logo">  
                         <object type="image/svg+xml" data="./img/footer/twitter.svg" class="logo-social">
                             Your browser does not support SVG
                         </object>
+                    </a>
+                    <a href="#" class="logo">
                         <object type="image/svg+xml" data="./img/footer/pinterest.svg" class="logo-social">
                             Your browser does not support SVG
                         </object>
                     </a>
+                    
                 </div>
             </div> 
         </div>

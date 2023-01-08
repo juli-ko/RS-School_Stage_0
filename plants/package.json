@@ -8,5 +8,9 @@
     "style": "sass --watch sass/style.scss sass/style.css"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "normalize-scss": "^7.0.1",
+    "normalize.css": "^8.0.1"
+  }
 }

@@ -1,0 +1,23 @@
+about {
+    background-color: $color-light;
+}
+
+.about__wrapper {
+    padding: 93px 0 94px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.about__content {
+    padding-right: 153px;
+    h2 {
+        margin-bottom: 38px;
+    }
+    margin-top: 13px;
+}
+
+.about_text{
+    line-height: 30px;
+}

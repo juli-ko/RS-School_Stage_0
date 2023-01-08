@@ -1,0 +1,43 @@
+.header{
+    background-color: $color-background;
+    padding: 42px 0 42px 0;
+}
+
+.header__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navigation {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    align-items: flex-end;
+}
+
+.navigation__element {
+    list-style: none;
+    >* {
+        
+        padding: 0;
+        padding-left: 47px;
+        font-family: $font-aditional;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 1.6rem;
+        line-height: 5rem;
+        text-decoration: none;
+        color: $color-links;
+        &:hover {
+            color: $color-aditional;
+            @extend %transition
+        }
+    }
+
+    
+}
+
+.element_colored {
+    color: $color-aditional;
+}

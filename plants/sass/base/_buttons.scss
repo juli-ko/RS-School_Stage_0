@@ -1,0 +1,57 @@
+.button {
+    padding-top: 11px;
+    padding-bottom: 11px;
+    font-family: $font-aditional;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 26px;
+    background-color: $color-background;
+    width: 161px;
+    border: 1px solid #E06733;
+    border-radius: 5px;
+    cursor: pointer;
+        &:hover {
+        background-color:$color-aditional;
+        color: $color-light;
+        @extend %transition
+    }
+
+    &_light {
+        background-color: $color-light;
+    }
+}
+
+.button__bordered {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    width: 158px;
+    border: 2px solid $color-aditional;
+    border-radius: 10px;
+    margin-top: 45px;
+    
+}
+
+.button-acordeon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 250px;
+    border-radius: 20px;
+    background-color: $color-background;
+    border: 0;
+    padding: 15px 40px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 20px;
+
+
+    color: #000000;
+    
+}
