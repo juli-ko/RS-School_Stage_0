@@ -7,10 +7,38 @@
     align-items: center;
     justify-content: space-between;
     padding: 60px 0 60px 0;
+    @include media-tablet{
+        flex-direction: row-reverse;
+        padding: 0 50px;
+    }
+    @include media-mobile{
+        padding: 0 25px;
+    }
 }
 
 .welcome__content {
-    padding-left: 222px;
-    padding-right: 10px;
+    margin-left: 22rem;
+    margin-right: 10px;
+    @include media-tablet{
+        margin-left: 0;
+        margin-right: 40px;
+        margin-bottom: 35px;
+    }
+    p {
+        @include media-mobile{
+            padding-bottom: 0;
+        }
+    }
 
+}
+
+.welcome-picture{
+    @include media-tablet{
+        width: 280px;
+        margin-bottom: 125px;
+        margin-top: 25px;
+    }
+    @include media-mobile {
+        display: none;
+    }
 }

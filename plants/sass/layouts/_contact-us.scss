@@ -1,22 +1,32 @@
 .contacts{
     background-color: $color-background;
     h2{
-        margin-top: 60px;
+        margin-top: 45px;
         font-family: 'Inika';
         font-weight: 700;
         font-size: 40px;
         line-height: 52px;
+        @include media-mobile{
+            font-size: 25px;
+            line-height: 33px;
+            margin-top: 23px;
+        }
     }
 }
 
 .contacts__wrapper{
     display: flex;
     justify-content: space-between;
+    @include media-tablet{
+        flex-direction: column;
+        align-items: center
+    }
 }
 .contact__woman {
     margin-top: 53px;
     margin-bottom: 0;
     display: flex;
+    order: 3;
 }
 
 .contact__city {
@@ -36,10 +46,30 @@
 }
 .selector {
     margin-top: 148px;
+    @include media-tablet{
+        margin: 100px 0 195px;
+    }
+    @include media-mobile{
+        width: 300px;
+        margin: 90px 0 77px;
+    }
 }
 
 .contact__header{
     display: flex;
     justify-content: center;
     padding-left: 41px;
+    @include media-tablet{
+        padding-left: 0;
+        margin-top: 0px;
+    }
+}
+
+.contact__woman-img{
+    @include media-tablet{
+        width: 200px;
+    }
+    @include media-mobile{
+        width: 100px;
+    }
 }

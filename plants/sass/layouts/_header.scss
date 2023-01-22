@@ -41,3 +41,27 @@
 .element_colored {
     color: $color-aditional;
 }
+
+.header__hamburger{
+    display: none;
+    
+}
+@media (max-width:767px){
+    .header__hamburger{
+        display: block;
+        margin: 5px;
+        background-repeat: no-repeat;
+        background-image: url(/plants/img/header/burger.svg);
+        width: 40px;
+        height: 34px;
+        position: relative;
+    }
+    .navigation{
+        display: none;
+    }
+
+}
+.active::after {
+    transform: rotate(90 deg);
+    display: none;
+}
