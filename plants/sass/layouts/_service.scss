@@ -9,6 +9,9 @@
     text-align: center;
     margin: 0;
     padding-bottom: 36px;
+    @include media-mobile{
+        padding: 0px 10px;
+    }
 }
 
 .service__top {
@@ -18,20 +21,58 @@
     padding-right: 324px - 109px;
     padding-top: 40px;
     padding-bottom: 80px;
+    @include media-tablet {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-bottom: 40px;
+    }
+    >h2{
+        margin: 27px 160px 40px 0; 
+        padding: 0;
+        @include media-tablet {
+            text-align: left;
+        }
+        @include media-mobile {
+            padding-right:0;
+        }
+    }
+    @include media-mobile {
+        padding-top: 5px;
+        padding-right:0;
+    }
 }
 .service_btns{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    @include media-mobile{
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
 }
 
 .service__item{
     display: flex;
     flex-direction: column;
+    @include media-tablet{
+        width: 28rem;
+    }
+    @include media-mobile{
+        margin: auto;
+    }
 }
 .service_btns>.button{
     margin-left: 38px;
-}
+    @include media-tablet{
+        margin-left: 0;
+        margin-right: 40px;
+    }
+    @include media-mobile {
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
+    }
 
 .service-wrapper {
     padding-bottom: 121px - 55px;
