@@ -7,6 +7,14 @@ about {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @include media-tablet {
+        flex-direction: column;
+        padding: 29px 50px 0;
+
+    }
+    @include media-mobile{
+        padding: 0 25px;
+    }
 
 }
 
@@ -14,10 +22,41 @@ about {
     padding-right: 153px;
     h2 {
         margin-bottom: 38px;
+        @include media-tablet{
+            margin: 0 100px 46px;
+            text-align: center;
+        }
+        @include media-mobile{
+            margin: 0 0 15px;
+        }
     }
     margin-top: 13px;
+    @include media-tablet {
+        padding-right: 0;
+    }
 }
 
 .about_text{
     line-height: 30px;
+    @include media-tablet{
+        font-size: 20px;
+        line-height: 30px;
+    }
+    @include media-mobile{
+        font-size: 15px;
+        line-height: 25px;
+    }
+}
+
+.about-picture{
+   @include media-tablet{
+        width: 250px;
+        padding-top: 70px;
+        margin-bottom: 90px;
+   } 
+   @include media-mobile{
+        width: 150px;
+        padding-top: 30px;
+        margin-bottom: 20px;
+   }
 }

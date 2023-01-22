@@ -12,6 +12,12 @@ body {
     font-weight: 400;
     font-size: 20px;
     line-height: 35px;
+    @include media-tablet {
+        font-size: 16px;
+        line-height: 25px;
+    }
+        
+    
     
 }
 
@@ -23,6 +29,15 @@ h1 {
     color: $color-heading;
     margin-top: 0;
     margin-bottom: 45px;
+    @include media-tablet{
+        font-size: 35px;
+        margin-bottom: 30px;
+    }
+    @include media-mobile {
+        margin-bottom: 20px;
+        font-size: 25px;
+        line-height: 35px;
+    }
 }
 .text__primary {
     color: $color-primary;
@@ -38,6 +53,15 @@ h2 {
     font-weight: 400;
     font-size: 40px;
     line-height: 52px;
+    @include media-tablet{
+        font-size: 35px;
+        line-height: 46px;
+
+    }
+    @include media-mobile{
+        font-size: 25px;
+        line-height: 33px;
+    }
 }
 
 h3 {

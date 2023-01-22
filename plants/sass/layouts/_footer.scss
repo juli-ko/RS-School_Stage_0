@@ -9,6 +9,10 @@
         color: $color-aditional;
         @extend %transition
     }
+    @include media-tablet{
+        line-height: 20px;
+    }
+
 
 
     color: #000000;
@@ -17,7 +21,10 @@
 .logo-social {
     cursor: pointer;
     margin-left: 23px;
-    
+    @include media-tablet{
+        margin-left: 23px;
+        margin-top: 20px;
+    }
 }
 
 
@@ -26,6 +33,9 @@
     align-items: center;
     justify-content: flex-end;
     padding-top: 8px;
+    @include media-tablet{
+        margin-right: 23px;
+    }
 
 }
 
@@ -46,9 +56,23 @@
         font-size: 20px;
         line-height: 50px;
         text-decoration: none;
+        
 
     }
+    @include media-tablet{
+            margin-left: 20px;
+            margin-top: 17px;
+        }
 }
 .footer_wrapper {
     margin-top: 40px;
+    @include media-tablet{
+        margin-top: 0;
+    }
+    .layout-3-column{
+        @include media-tablet{
+            flex-direction: column;
+            align-items: center;
+        }
+    } 
 }
