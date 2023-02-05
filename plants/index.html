@@ -10,8 +10,6 @@
     <link rel="apple-touch-icon" sizes="180x180" href="./img/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./img/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./img/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <script src="./index.js"></script>
 
 </head>
 <body>
@@ -67,42 +65,42 @@
                 <div class="layout-3-column service-wrapper">
                     <article class="service__item">
                         <img src="./img/service/first.png" alt="service item">
-                        <div class="service__item service__item__bordered">
+                        <div class="service__item__bordered">
                             <h3>Garden care</h3>
                             <p class="service__text">Lorem Ipsum has been the industry</p>
                         </div>
                     </article>
                     <article class="service__item">
                         <img src="./img/service/first_1.png" alt="service item">
-                        <div class="service__item service__item__bordered">
+                        <div class="service__item__bordered">
                             <h3>Planting</h3>
                             <p class="service__text">Lorem Ipsum has been the industry</p>
                         </div>
                     </article>
                     <article class="service__item">
                         <img src="./img/service/first_2.png" alt="service item">
-                        <div class="service__item service__item__bordered">
+                        <div class="service__item__bordered">
                             <h3>Lawn care</h3>
                             <p class="service__text">Lorem Ipsum has been the industry</p>
                         </div>
                     </article>
                     <article class="service__item">
                         <img src="img/service/first_3.png" alt="service item">
-                        <div class="service__item service__item__bordered">
+                        <div class="service__item__bordered">
                             <h3>Planting</h3>
                             <p class="service__text">Lorem Ipsum has been the industry</p>
                         </div>
                     </article>
                     <article class="service__item">
                         <img src="img/service/first_4.png" alt="service item">
-                        <div class="service__item service__item__bordered">
+                        <div class="service__item__bordered">
                             <h3>Garden care</h3>
                             <p class="service__text">Lorem Ipsum has been the industry</p>
                         </div>
                     </article>
                     <article class="service__item">
                         <img src="img/service/first_5.png" alt="service item">
-                        <div class="service__item service__item__bordered">
+                        <div class="service__item__bordered">
                             <h3>Planting</h3>
                             <p class="service__text">Lorem Ipsum has been the industry</p>
                                 
@@ -135,7 +133,7 @@
                     <h2 class="text text__primary">Contact us</h2>
                 </div> 
                 <div class="selector">
-                    <select name="format">
+                    <select name="format" class="select-css">
                         <option selected disabled>City</option>
                         <option value="Sherrill, NY">Sherrill, NY</option>
                         <option value="New York City">New York City</option>
@@ -143,7 +141,75 @@
                         <option value="Yonkers, NY">Yonkers, NY</option>
                     </select>
                 </div>
+               
             </div>
+             <div class="city-selected sherill">
+                    <div class="city-adress-wrapper">
+                        <div class="left-side-city">
+                            <p>City:</p>
+                            <p>Phone:</p>
+                            <p>Office adress:</p>
+                        </div>
+                        <div class="right-side-city">
+                            <p>Sherrill, NY</p>
+                            <p>+1 315 908 0004</p>
+                            <p>14 WEST Noyes BLVD</p>
+                        </div>
+                    </div>
+                    
+                    <button class="button call-us-button"> <a href="tel:+1 315 908 0004"> Call us</a></button>
+                </div>
+                <div class="city-selected new_york">
+                    <div class="city-adress-wrapper">
+                        <div class="left-side-city">
+                            <p>City:</p>
+                            <p>Phone:</p>
+                            <p>Office adress:</p>
+                        </div>
+                        <div class="right-side-city">
+                            <p>New York City</p>
+                            <p>+1 212 456 0002</p>
+                            <p>9 East 91st Street</p>
+                        </div>
+                    </div>
+                    
+                    <button class="button call-us-button"> <a href="tel:+1 212 456 0002"> Call us</a></button>
+
+                </div>
+                <div class="city-selected canandaigua">
+                    <div class="city-adress-wrapper">
+                        <div class="left-side-city">
+                            <p>City:</p>
+                            <p>Phone:</p>
+                            <p>Office adress:</p>
+                        </div>
+                        <div class="right-side-city">
+                            <p>Canandaigua, NY</p>
+                            <p>+1 585 393 0001</p>
+                            <p>151 Charlotte Street</p>
+                        </div>
+                    </div>
+                    
+                    <button class="button call-us-button"> <a href="tel:+1 585 393 0001"> Call us</a></button>
+
+                </div>
+                <div class="city-selected yonkers">
+                    <div class="city-adress-wrapper">
+                        <div class="left-side-city">
+                            <p>City:</p>
+                            <p>Phone:</p>
+                            <p>Office adress:</p>
+                        </div>
+                        <div class="right-side-city">
+                            <p>Yonkers, NY</p>
+                            <p>+1 914 678 0003</p>
+                            <p>511 Warburton Ave</p>
+                        </div>
+                    </div>
+                    
+                    <button class="button call-us-button"> <a href="tel:+1 914 678 0003"> Call us</a></button>
+
+                </div>
         </section>     
     </main>
     <footer>
@@ -182,4 +248,5 @@
         </div>
     </footer>
 </body>
+<script src="./index.js"></script>
 </html>

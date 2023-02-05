@@ -28,7 +28,9 @@
 .service__item{
     display: flex;
     flex-direction: column;
+    @extend %transition;
 }
+
 .service_btns>.button{
     margin-left: 38px;
 }
@@ -43,3 +45,7 @@
     margin-bottom: 55px;
 }
     
+.blurred {
+    filter: blur(3px);
+    @extend %transition;
+}
