@@ -1,11 +1,16 @@
 
+//GLOBAL CONSTANTS
+
+//greeting+time
 const timeOnPage = document.querySelector(".time");
 const dateOnPage = document.querySelector(".date");
 const greetingOnPage = document.querySelector(".greeting");
 const userName = document.querySelector(".name");
+//background
 const body = document.querySelector("body");
 const slideNext = document.querySelector(".slide-next");
 const slidePrev = document.querySelector(".slide-prev");
+//weather
 const weatherIcon = document.querySelector(".weather-icon");
 const temperature = document.querySelector(".temperature");
 const weatherDescription = document.querySelector(".weather-description");
@@ -13,17 +18,24 @@ const windDescription = document.querySelector(".wind-description");
 const humidityDescription = document.querySelector(".humidity-description");
 const city = document.querySelector(".city");
 const weatherErorr = document.querySelector(".weather-error");
+//quotes
 const changeQuote = document.querySelector(".change-quote");
 const quote = document.querySelector(".quote");
 const author = document.querySelector(".author");
 
+//GLOBAL VARIABLE
 let randomNum = "";
+let orderOfQuote = 0;
 
+//FUNCTIONS
+
+//for background setting - getting random nuber fom 1 to 10
 function getRandomNum() {
   randomNum = (Math.floor(Math.random() * 20) + 1).toString().padStart(2, "0");
 }
 getRandomNum();
 
+//for date - indicate and showing current date
 function showDate() {
   let date = new Date();
   const options = {
@@ -35,6 +47,7 @@ function showDate() {
   dateOnPage.textContent = currentDate;
 }
 
+//for greeting - indicate what time of the day is right now
 function getTimeOfDay() {
   let date = new Date();
   let hours = date.getHours();
@@ -42,10 +55,12 @@ function getTimeOfDay() {
   return timeOfDay[Math.floor(hours / 6)];
 }
 
+//for greeting - creating phrase like 'good morning,'
 function showGreeting() {
   greetingOnPage.textContent = `Good ${getTimeOfDay()},`;
 }
 
+//for greeting and - renovate time and time of the day every second
 function showTime() {
   let date = new Date();
   let currentTime = date.toLocaleTimeString();
@@ -55,12 +70,15 @@ function showTime() {
   showGreeting();
   setTimeout(showTime, 1000);
 }
+showTime();
 
+//for greeting and weather - collecting data in storage
 function setLocalStorage() {
   localStorage.setItem("name", userName.value);
   localStorage.setItem("city", city.value);
 }
 
+//for greeting and weather - getting data from storage
 function getLocalStorage() {
   if (localStorage.getItem("name")) {
     userName.value = localStorage.getItem("name");
@@ -73,7 +91,10 @@ function getLocalStorage() {
     city.value = "Minsk";
   }
 }
+window.addEventListener("beforeunload", setLocalStorage);
+window.addEventListener("load", getLocalStorage);
 
+//for background - show backgroud when image is onloaded
 function setBackground() {
   const img = new Image();
   img.src = `https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${getTimeOfDay()}/${randomNum}.jpg`;
@@ -82,6 +103,7 @@ function setBackground() {
   };
 }
 
+//for background - fuctions for flipping image which order equal to randomNum
 function getSlideNext() {
   if (randomNum === "20") {
     randomNum = "1";
@@ -91,7 +113,6 @@ function getSlideNext() {
   }
   setBackground();
 }
-
 function getSlidePrev() {
   if (randomNum === "01") {
     randomNum = "20";
@@ -102,6 +123,11 @@ function getSlidePrev() {
   setBackground();
 }
 
+setBackground();
+slideNext.addEventListener("click", getSlideNext);
+slidePrev.addEventListener("click", getSlidePrev);
+
+//for weather - getting weather info from api, showing info on page if city exists
 async function getWeather() {
   try {
     let url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=en&appid=e673e8d25ebd4cc511c40f83d77653ee&units=metric`;
@@ -127,17 +153,23 @@ async function getWeather() {
   }
 }
 
+//for weather - renovate info about weather, when user press 'Enter' on city-input
 function setCity(event) {
   if (event.code === "Enter") {
     getWeather();
     city.blur();
   }
 }
+window.addEventListener("load", getWeather);
+city.addEventListener("keypress", setCity);
 
-let orderOfQuote = 0
+
+//for quotes - get random number for the first quote
 function getOrderOfQuote(){
   orderOfQuote = Math.floor(Math.random() * 5) 
 }
+
+//for quotes - finding quote in json EN
 async function getQuotes() {
   const quotes = "src/js/quotesEn.json";
   const res = await fetch(quotes);
@@ -146,7 +178,8 @@ async function getQuotes() {
   quote.textContent = data[orderOfQuote].text;
   author.textContent = data[orderOfQuote].author;
 }
-//когда перелистываем цитаты
+
+//for quotes - flipping through quotes, get number for the next quote
 function getQwoteNext() {
   console.log(orderOfQuote);
   if (orderOfQuote === 4) {
@@ -156,22 +189,12 @@ function getQwoteNext() {
   }
   getQuotes();
 }
-
 getOrderOfQuote();
 getQuotes();
-
-showTime();
-
-window.addEventListener("beforeunload", setLocalStorage);
-window.addEventListener("load", getLocalStorage);
-
-window.addEventListener("load", getWeather);
-city.addEventListener("keypress", setCity);
-
-setBackground();
-
-slideNext.addEventListener("click", getSlideNext);
-slidePrev.addEventListener("click", getSlidePrev);
-
-//когда перелистываем цитаты
 changeQuote.addEventListener("click", getQwoteNext);
+
+
+
+
+
+
