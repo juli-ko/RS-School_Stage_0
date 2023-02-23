@@ -16,7 +16,7 @@ body {
   font-size: 16px;
   color: #fff;
   text-align: center;
-  background: url("../assets/img/bg.jpg") center/cover, rgba(0, 0, 0, 0.5);
+  /*background: url("../assets/img/bg.jpg") center/cover, rgba(0, 0, 0, 0.5);*/
   background-blend-mode: multiply;
   transition: background-image 1s ease-in-out;
 }
@@ -210,7 +210,7 @@ body {
 .greeting-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: stretch;
+  justify-content: center;
   align-items: center;
   min-height: 48px;
   width: 100vw;
@@ -218,7 +218,7 @@ body {
 }
 
 .greeting {
-  flex: 1;  
+  flex: 1; 
   padding: 10px;
   text-align: right;
 }
@@ -277,6 +277,7 @@ body {
 
   .greeting {
     padding: 5px;
+    
   }
 
   .name {
