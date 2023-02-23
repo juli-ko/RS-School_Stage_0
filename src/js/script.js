@@ -1,5 +1,5 @@
 
-//GLOBAL CONSTANTS
+//GLOBAL CONSTANTS______________________________________________________________________________________________
 
 //greeting+time
 const timeOnPage = document.querySelector(".time");
@@ -22,12 +22,19 @@ const weatherErorr = document.querySelector(".weather-error");
 const changeQuote = document.querySelector(".change-quote");
 const quote = document.querySelector(".quote");
 const author = document.querySelector(".author");
+//audioplayer
+const audio = new Audio();
+const playBtn = document.querySelector(".play");
+const playNextBtn = document.querySelector(".play-prev");
+const playPrevBtn = document.querySelector(".play-next");
 
-//GLOBAL VARIABLE
+
+//GLOBAL VARIABLE________________________________________________________________________________________________
 let randomNum = "";
 let orderOfQuote = 0;
+let isPlayAudio = false;
 
-//FUNCTIONS
+//FUNCTIONS______________________________________________________________________________________________________
 
 //for background setting - getting random nuber fom 1 to 10
 function getRandomNum() {
@@ -193,8 +200,17 @@ getOrderOfQuote();
 getQuotes();
 changeQuote.addEventListener("click", getQwoteNext);
 
+//for audio - play button functions
+function playAudio() {
+  audio.src = "https://7oom.ru/audio/naturesounds/07%20Birds%20(7oom.ru).mp3";
+  audio.currentTime = 0;
+  audio.play();
+}
+function pauseAudio() {
+  audio.pause();
+}
 
-
+//for audio - button
 
 
 
