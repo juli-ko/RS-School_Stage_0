@@ -1,3 +1,5 @@
+//IMPORT MODULES
+import playList from "./modules/playlist.js";
 
 //GLOBAL CONSTANTS______________________________________________________________________________________________
 
@@ -25,14 +27,24 @@ const author = document.querySelector(".author");
 //audioplayer
 const audio = new Audio();
 const playBtn = document.querySelector(".play");
-const playNextBtn = document.querySelector(".play-prev");
-const playPrevBtn = document.querySelector(".play-next");
+const playNextBtn = document.querySelector(".play-next");
+const playPrevBtn = document.querySelector(".play-prev");
+const playListContainer = document.querySelector(".play-list");
+//audioplayer - aditional
+const durationBar = document.querySelector(".duration-player");
+const durationTimer = document.querySelector(".duration-timer");
+const progressBar = document.querySelector(".progress");
+const volumeBtn = document.querySelector(".volume-button");
+const volumeBar = document.querySelector(".volume-slider");
+const songActive = document.querySelector(".song-name");
 
 
 //GLOBAL VARIABLE________________________________________________________________________________________________
 let randomNum = "";
 let orderOfQuote = 0;
 let isPlayAudio = false;
+let playNum = 0;
+
 
 //FUNCTIONS______________________________________________________________________________________________________
 
@@ -134,7 +146,8 @@ setBackground();
 slideNext.addEventListener("click", getSlideNext);
 slidePrev.addEventListener("click", getSlidePrev);
 
-//for weather - getting weather info from api, showing info on page if city exists
+//for weather***********************************************************************************************************
+//getting weather info from api, showing info on page if city exists
 async function getWeather() {
   try {
     let url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=en&appid=e673e8d25ebd4cc511c40f83d77653ee&units=metric`;
@@ -160,7 +173,7 @@ async function getWeather() {
   }
 }
 
-//for weather - renovate info about weather, when user press 'Enter' on city-input
+//renovate info about weather, when user press 'Enter' on city-input
 function setCity(event) {
   if (event.code === "Enter") {
     getWeather();
@@ -171,12 +184,13 @@ window.addEventListener("load", getWeather);
 city.addEventListener("keypress", setCity);
 
 
-//for quotes - get random number for the first quote
+//for quotes**************************************************************************************************************
+//get random number for the first quote
 function getOrderOfQuote(){
   orderOfQuote = Math.floor(Math.random() * 5) 
 }
 
-//for quotes - finding quote in json EN
+//finding quote in json EN
 async function getQuotes() {
   const quotes = "src/js/quotesEn.json";
   const res = await fetch(quotes);
@@ -186,7 +200,7 @@ async function getQuotes() {
   author.textContent = data[orderOfQuote].author;
 }
 
-//for quotes - flipping through quotes, get number for the next quote
+//flipping through quotes, get number for the next quote
 function getQwoteNext() {
   console.log(orderOfQuote);
   if (orderOfQuote === 4) {
@@ -200,17 +214,178 @@ getOrderOfQuote();
 getQuotes();
 changeQuote.addEventListener("click", getQwoteNext);
 
-//for audio - play button functions
+//for audio*************************************************************************************************************** 
+//initial volume 
+audio.volume = .50;
+
+//'play' button functions
 function playAudio() {
-  audio.src = "https://7oom.ru/audio/naturesounds/07%20Birds%20(7oom.ru).mp3";
-  audio.currentTime = 0;
-  audio.play();
+  if (isPlayAudio === true) {
+    audio.src = playList[playNum].src;
+    audio.currentTime = 0;
+    audio.play();
+    playBtn.classList.add("pause");
+  } else {
+    audio.pause();
+    playBtn.classList.remove("pause");
+  } 
+  markActiveSong();
 }
-function pauseAudio() {
-  audio.pause();
+
+//button 'play' changing
+function toggleBtn() {
+  if (isPlayAudio !== true) {
+    isPlayAudio = true;
+  } else {
+    isPlayAudio = false;
+  }
+  playAudio();
+}
+playBtn.addEventListener("click", toggleBtn);
+
+//buttons 'prev', 'next'
+function getAudioNext() {
+  if (playNum === playList.length-1) {
+    playNum = 0;
+  } else {
+    playNum++;
+  };
+  isPlayAudio = true;
+  playAudio() ;
+}
+function getAudioPrev() {
+  if (playNum === 0) {
+    playNum = playList.length-1;
+  } else {
+    playNum -= 1;
+  }
+  isPlayAudio = true;
+  playAudio();
+}
+playNextBtn.addEventListener("click", getAudioNext);
+playPrevBtn.addEventListener("click", getAudioPrev);
+
+//creation list of tracks
+function playListCreation(){
+  playList.forEach((el) => {
+    const li = document.createElement("li");
+    li.classList.add("play-item");
+    li.textContent = el.title;
+    playListContainer.append(li); 
+  });
+}
+playListCreation();
+
+// mark active song
+function markActiveSong () {
+  document.querySelectorAll(".play-item").forEach((el,index) =>{
+    el.classList.remove("item-paused");
+    if (index === playNum) {
+      el.classList.add("item-active");
+    } else {
+      el.classList.remove("item-active");
+    }
+    if (el.classList.contains('item-active')){
+      songActive.textContent = el.textContent;
+    }
+  })
+  pauseIco();
 }
 
-//for audio - button
+//active song ico
+function pauseIco (){
+  let el = document.querySelector(".item-active");
+  if (playBtn.classList.contains("pause")) {
+    el.classList.add("item-paused");
+  } 
+}
+
+//automaticaly play the next song
+audio.addEventListener("ended", getAudioNext);
+
+//turn 128 seconds into 2:08
+function getTimeCodeFromNum(num) {
+  let seconds = parseInt(num);
+  let minutes = parseInt(seconds / 60);
+  seconds -= minutes * 60;
+  const hours = parseInt(minutes / 60);
+  minutes -= hours * 60;
+
+  if (hours === 0) return `${minutes}:${String(seconds % 60).padStart(2, 0)}`;
+  return `${String(hours).padStart(2, 0)}:${minutes}:${String(
+    seconds % 60
+  ).padStart(2, 0)}`;
+}
+//check how long is the music
+audio.addEventListener(
+  "loadeddata",
+  () => {
+    document.querySelector(".duration-timer .length").textContent =
+      getTimeCodeFromNum(audio.duration);
+  },
+  false
+);
+
+//check audio percentage and update time accordingly
+setInterval(() => {
+  progressBar.style.width = audio.currentTime / audio.duration * 100 + "%";
+  document.querySelector(".duration-timer .current").textContent = getTimeCodeFromNum(audio.currentTime);
+}, 100);
+
+//click on timeline to skip around
+durationBar.addEventListener("click",
+  (e) => {
+    const timelineWidth = window.getComputedStyle(durationBar).width;
+    const timeToSeek = (e.offsetX / parseInt(timelineWidth)) * audio.duration;
+    audio.currentTime = timeToSeek;
+  },
+  false
+);
+
+//clik on song to play
+document.querySelectorAll(".play-item").forEach((el)=> {
+  const oneSong = el 
+  oneSong.addEventListener(
+    "click",
+    (song) => {
+      document.querySelectorAll(".play-item").forEach((el, index) => {
+        if (oneSong.textContent === el.textContent) {
+          playNum = index;
+        }
+      });
+      if(isPlayAudio === true){
+        isPlayAudio = false;
+      }else{
+        isPlayAudio = true;
+      }
+      playAudio();
+    },
+    false
+  );
+});
 
 
+//for volume*****************************************************************************************************************
+//button 'volume off/on'
+volumeBtn.addEventListener("click", () => {
+  audio.muted = !audio.muted;
+  if (audio.muted) {
+    volumeBtn.classList.remove("volume-on");
+    volumeBtn.classList.add("volume-off");
+  } else {
+    volumeBtn.classList.remove("volume-off");
+    volumeBtn.classList.add("volume-on");
+  }
+});
 
+//click volume slider to change volume
+volumeBar.addEventListener("click",
+  (e) => {
+    const sliderWidth = window.getComputedStyle(volumeBar).width;
+    const newVolume = e.offsetX / parseInt(sliderWidth);
+    audio.volume = newVolume;
+    document.querySelector(".volume-percentage").style.width =
+      newVolume * 100 + "%";
+  },
+  false
+);

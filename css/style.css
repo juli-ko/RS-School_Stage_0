@@ -31,11 +31,50 @@ body {
   padding: 20px;
 }
 
+.progress-bar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 600px;
+  height: 5px;
+  padding-left: 30px;
+}
+.duration-player,
+.volume-slider {
+  background: white;
+  height: 100%;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 0 2px 10px 0 #0008;
+}
+.duration-player{
+  width: 350px;
+}
+.volume-slider{
+  width: 70px;
+  margin-left: 15px;
+}
+
+.progress,
+.volume-percentage {
+  background: coral;
+  width: 0%;
+  height: 100%;
+  transition: 0.15s;
+}
+.volume-percentage {
+  width: 50%;
+}
+
+.duration-timer{
+  display: inline-flex;
+  padding: 15px;
+}
 .player-controls {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 120px;
+  width: 750px;
   margin-bottom: 28px;
 }
 
@@ -45,8 +84,8 @@ body {
 
 .play-item {
   position: relative;
-  padding: 5px;
-  padding-left: 20px;
+  padding: 7px;
+  padding-left: 40px;
   list-style: none;
   opacity: .8;
   cursor: pointer;
@@ -58,21 +97,48 @@ body {
 }
 
 .play-item::before {
-  content: "\2713";  
+  content: '';  
   position: absolute;
-  left: 0;
-  top: 2px;
-  font-weight: 900;
+  left: 5px;
+  top: 5px;
+  width: 22px;
+  height: 22px;
+  background-size: 22px 22px;
+  background-image: url('../assets/svg/play.svg');
+  background-repeat: no-repeat;
+}
+.item-active::before{
+   background-image: url('../assets/svg/play_song.svg');
 }
 
-.item-active::before {
-  color: #C5B358;
+.item-paused::before{
+   background-image: url('../assets/svg/pause_song.svg');
 }
+
+.item-active {
+  color: coral;
+  opacity: 1;
+}
+
+
+.volume-button{
+  margin-left: 20px;
+}
+.volume-off {
+  background-image: url("../assets/svg/volume-mute-fill.svg");
+}
+
+.volume-on {
+  background-image: url("../assets/svg/volume-up-fill.svg");
+}
+
+
 
 .player-icon,
 .slider-icon,
-.change-quote {
-  width: 32px;
+.change-quote,
+.volume-button  {
+  width: 36px;
   height: 32px;
   background-size: 32px 32px;
   background-position: center center;
@@ -80,7 +146,6 @@ body {
   background-color: transparent;
   border: 0;
   outline: 0;
-  opacity: .8;
   cursor: pointer;
   transition: .3s;  
 }
@@ -156,6 +221,11 @@ body {
   outline: 0;
   border-bottom: 1px solid #fff;
   background-color: transparent;
+}
+.song-name{
+  font-size: 20px;
+  line-height: 24px;
+  height: 24px;
 }
 
 .city::placeholder {  

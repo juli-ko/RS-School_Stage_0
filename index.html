@@ -11,10 +11,25 @@
 <body>
   <header class="header">
     <div class="player">
+      <div class="song-name">         </div>
       <div class="player-controls">
         <button class="play-prev player-icon"></button>
         <button class="play player-icon"></button>
         <button class="play-next player-icon"></button>
+        <div class="progress-bar">
+          <div class="duration-player">
+            <div class="progress"></div>
+          </div>
+          <div class="duration-timer">
+            <div class="current">0:00</div>
+            <div class="divider">/</div>
+            <div class="length">0:00</div>
+          </div>
+        <button class="volume-button volume-on"></button>
+        <div class="volume-slider">
+          <div class="volume-percentage"></div>  
+        </div>
+        </div>
       </div>
       <ul class="play-list"></ul>
     </div>
@@ -53,6 +68,6 @@
       <div class="author"></div>
     </div>
   </footer>
-  <script src="src/js/script.js"></script>
+  <script src="src/js/script.js" type="module"></script>
 </body>
 </html>
