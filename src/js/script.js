@@ -26,6 +26,7 @@ const quote = document.querySelector(".quote");
 const author = document.querySelector(".author");
 //audioplayer
 const audio = new Audio();
+const player = document.querySelector(".player");
 const playBtn = document.querySelector(".play");
 const playNextBtn = document.querySelector(".play-next");
 const playPrevBtn = document.querySelector(".play-prev");
@@ -37,14 +38,27 @@ const progressBar = document.querySelector(".progress");
 const volumeBtn = document.querySelector(".volume-button");
 const volumeBar = document.querySelector(".volume-slider");
 const songActive = document.querySelector(".song-name");
-
+//settings
+const settingsBtn = document.querySelector(".settings-button");
+const settings = document.querySelector(".settings");
+const settingsToggleLang = document.querySelector(".languge-toggle");
+const settingsToggleClock = document.querySelector(".clock-toggle");
+const settingsToggleDate = document.querySelector(".date-toggle");
+const settingsToggleGreeting = document.querySelector(".greeting-toggle");
+const settingsToggleAudio = document.querySelector(".audio-toggle");
+const settingsToggleWeather = document.querySelector(".weather-toggle");
+const settingsToggleQuote = document.querySelector(".quote-toggle");
 
 //GLOBAL VARIABLE________________________________________________________________________________________________
 let randomNum = "";
 let orderOfQuote = 0;
 let isPlayAudio = false;
 let playNum = 0;
-
+let state = {
+  language: "en",
+  photoSource: "github",
+  blocks: ["time", "date", "greeting", "quote", "weather", "audio", "todolist"],
+};
 
 //FUNCTIONS______________________________________________________________________________________________________
 
@@ -63,6 +77,9 @@ function showDate() {
     day: "numeric",
   };
   let currentDate = date.toLocaleDateString("en-US", options);
+  if (state.language === "ru") {
+    currentDate = date.toLocaleDateString("ru-Ru", options);
+  }
   dateOnPage.textContent = currentDate;
 }
 
@@ -74,9 +91,21 @@ function getTimeOfDay() {
   return timeOfDay[Math.floor(hours / 6)];
 }
 
+//translate greeting
+function translateGreeting(){
+  if ((state.language === "en")) {
+    return `Good ${getTimeOfDay()},`;
+  } else {
+    if (getTimeOfDay()==='night') return "Доброй ночи,";
+    if (getTimeOfDay() === "morning") return "Доброе утро,";
+    if (getTimeOfDay() === "afternoon") return "Добрый день,";
+    if (getTimeOfDay() === "evening") return "Добрый вечер,";
+  }   
+}
+
 //for greeting - creating phrase like 'good morning,'
 function showGreeting() {
-  greetingOnPage.textContent = `Good ${getTimeOfDay()},`;
+  greetingOnPage.textContent = translateGreeting();
 }
 
 //for greeting and - renovate time and time of the day every second
@@ -88,6 +117,7 @@ function showTime() {
   showDate();
   showGreeting();
   setTimeout(showTime, 1000);
+  getWeather();
 }
 showTime();
 
@@ -95,6 +125,7 @@ showTime();
 function setLocalStorage() {
   localStorage.setItem("name", userName.value);
   localStorage.setItem("city", city.value);
+  localStorage.setItem("settings", state);
 }
 
 //for greeting and weather - getting data from storage
@@ -103,12 +134,16 @@ function getLocalStorage() {
     userName.value = localStorage.getItem("name");
   } else {
     userName.placeholder = "Enter your name";
+    if (state.language === 'ru'){
+      userName.placeholder = "Ваше имя";
+    }
   }
   if (localStorage.getItem("city")) {
     city.value = localStorage.getItem("city");
   } else {
     city.value = "Minsk";
   }
+
 }
 window.addEventListener("beforeunload", setLocalStorage);
 window.addEventListener("load", getLocalStorage);
@@ -150,7 +185,7 @@ slidePrev.addEventListener("click", getSlidePrev);
 //getting weather info from api, showing info on page if city exists
 async function getWeather() {
   try {
-    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=en&appid=e673e8d25ebd4cc511c40f83d77653ee&units=metric`;
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=${state.language}&appid=e673e8d25ebd4cc511c40f83d77653ee&units=metric`;
     const res = await fetch(url);
     const data = await res.json();
     weatherErorr.textContent = "";
@@ -158,14 +193,28 @@ async function getWeather() {
     weatherIcon.classList.add(`owf-${data.weather[0].id}`);
     temperature.textContent = `${Math.round(data.main.temp)}°C`;
     weatherDescription.textContent = data.weather[0].description;
-    windDescription.textContent = `Wind speed: ${Math.round(
-      data.wind.speed
-    )}m/s`;
-    humidityDescription.textContent = `Humidity: ${Math.round(
-      data.main.humidity
-    )}%`;
-  } catch {
-    weatherErorr.textContent = `${city.value} is not a city`;
+    if (state.language ==='en'){
+      windDescription.textContent = `Wind speed: ${Math.round(
+        data.wind.speed
+      )}m/s`;
+      humidityDescription.textContent = `Humidity: ${Math.round(
+        data.main.humidity
+      )}%`;
+    }else{
+      windDescription.textContent = `Скорость ветра: ${Math.round(
+        data.wind.speed
+      )}m/s`;
+      humidityDescription.textContent = `Влажность: ${Math.round(
+        data.main.humidity
+      )}%`;
+    } 
+  } catch { 
+    if (state.language ==='ru'){
+      weatherErorr.textContent = `${city.value} - это не название города`;
+    }else{
+      weatherErorr.textContent = `${city.value} is not a city`;
+    }
+
     temperature.textContent = "";
     weatherDescription.textContent = "";
     windDescription.textContent = "";
@@ -192,7 +241,10 @@ function getOrderOfQuote(){
 
 //finding quote in json EN
 async function getQuotes() {
-  const quotes = "src/js/quotesEn.json";
+  let quotes = "src/js/quotesEn.json";
+  if (state.language ==='ru') {
+    quotes = "src/js/quotesRu.json";
+  }
   const res = await fetch(quotes);
   const data = await res.json();
 
@@ -350,14 +402,14 @@ document.querySelectorAll(".play-item").forEach((el)=> {
     (song) => {
       document.querySelectorAll(".play-item").forEach((el, index) => {
         if (oneSong.textContent === el.textContent) {
+          if (playNum === index && isPlayAudio === true) {
+            isPlayAudio = false;
+          } else {
+            isPlayAudio = true;
+          }
           playNum = index;
         }
       });
-      if(isPlayAudio === true){
-        isPlayAudio = false;
-      }else{
-        isPlayAudio = true;
-      }
       playAudio();
     },
     false
@@ -389,3 +441,70 @@ volumeBar.addEventListener("click",
   },
   false
 );
+
+
+
+//for settings****************************************************************************************************************
+//open settings window
+function openSettings(){
+  if (settingsBtn.classList.contains('opened-settings')){
+    settingsBtn.classList.remove("opened-settings");
+    settings.style.visibility = "hidden";
+  }else{
+    settingsBtn.classList.add("opened-settings");
+    settings.style.visibility = "visible";
+  }
+}
+settingsBtn.addEventListener('click', openSettings)
+
+//change languge toggle button
+function changeLang(){
+  if (settingsToggleLang.classList.contains("off-toggle")) {
+    settingsToggleLang.classList.remove("off-toggle");
+    state.language = 'en';
+  }else{
+    settingsToggleLang.classList.add("off-toggle");
+    state.language = "ru";
+  } 
+  showTime();
+  getQuotes();
+  setLocalStorage();
+  getLocalStorage();
+}
+settingsToggleLang.addEventListener('click',changeLang)
+
+//hide-open chosen widget
+function hideWidget(button, block){
+  if (button.classList.contains("off-toggle")) {
+    button.classList.remove("off-toggle");
+    block.style.opacity = 1;
+  } else {
+    button.classList.add("off-toggle");
+    block.style.opacity = 0;
+  } 
+}
+
+//hide-open Clock
+settingsToggleClock.addEventListener('click',()=>{
+  hideWidget(settingsToggleClock, timeOnPage);
+})
+//hide-open Date
+settingsToggleDate.addEventListener('click',() =>{
+  hideWidget(settingsToggleDate, dateOnPage);
+})
+//hide-open Greeting and Name
+settingsToggleGreeting.addEventListener("click", () => {
+  hideWidget(settingsToggleGreeting, document.querySelector(".greeting-container"));
+});
+//hide-open Audio player
+settingsToggleAudio.addEventListener("click", () => {
+  hideWidget(settingsToggleAudio, player);
+});
+//hide-open Weather
+settingsToggleWeather.addEventListener("click", () => {
+  hideWidget(settingsToggleWeather, document.querySelector(".weather"));
+});
+//hide-open Quote
+settingsToggleQuote.addEventListener("click", () => {
+  hideWidget(settingsToggleQuote, document.querySelector(".quote-block"));
+});
