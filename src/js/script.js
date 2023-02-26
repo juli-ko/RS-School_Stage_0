@@ -55,6 +55,47 @@ const selectTag = document.querySelector(".select-tag");
 const github = document.querySelector("#github");
 const unsplash = document.querySelector("#unsplash");
 const flickr = document.querySelector("#flickr");
+const dictionary = {
+  en: {
+    word_lang: "Language:",
+    word_show: "Show panel:",
+    word_clock: "Clock:",
+    word_date: "Date:",
+    word_greeting: "Greeting:",
+    word_audioplayer: "Audio player:",
+    word_weather: "Weather:",
+    word_quote: "Quote:",
+    word_todo: "ToDo List:",
+    word_background: "Background:",
+    word_resourse: "Image resource:",
+    word_image: "Image tag:",
+    word_dayTime: "time of day",
+    word_paris: "paris",
+    word_ocean: "ocean",
+    word_forest: "forest",
+  },
+  ru: {
+    word_lang: "Язык:",
+    word_show: "Показать панель:",
+    word_clock: "Часы:",
+    word_date: "Дата:",
+    word_greeting: "Приветствие:",
+    word_audioplayer: "Плеер:",
+    word_weather: "Погода:",
+    word_quote: "Цитата:",
+    word_todo: "Список дел:",
+    word_background: "Фон:",
+    word_resourse: "Источник изображений:",
+    word_image: "Тег:",
+    word_dayTime: "время суток",
+    word_paris: "париж",
+    word_ocean: "океан",
+    word_forest: "лес",
+  },
+};
+
+
+
 
 //GLOBAL VARIABLE________________________________________________________________________________________________
 let randomNum = "";
@@ -129,32 +170,7 @@ function showTime() {
 }
 showTime();
 
-//for greeting and weather - collecting data in storage
-function setLocalStorage() {
-  localStorage.setItem("name", userName.value);
-  localStorage.setItem("city", city.value);
-  localStorage.setItem("settings", state);
-}
 
-//for greeting and weather - getting data from storage
-function getLocalStorage() {
-  if (localStorage.getItem("name")) {
-    userName.value = localStorage.getItem("name");
-  } else {
-    userName.placeholder = "Enter your name";
-    if (state.language === 'ru'){
-      userName.placeholder = "Ваше имя";
-    }
-  }
-  if (localStorage.getItem("city")) {
-    city.value = localStorage.getItem("city");
-  } else {
-    city.value = "Minsk";
-  }
-
-}
-window.addEventListener("beforeunload", setLocalStorage);
-window.addEventListener("load", getLocalStorage);
 
 //for background ************************************************************************************************************************************ 
 //get image on unsplash
@@ -496,7 +512,33 @@ function openSettings(){
   }
 }
 settingsBtn.addEventListener('click', openSettings)
+//translation of the settings
+function translateSettings(){
+  console.log(state.language);
+  let dict = {}
+  if (state.language === "en") {
+    dict = dictionary.en;
+  } else {
+    dict = dictionary.ru;
+  }
+  document.querySelector("#word_dayTime").textContent = dict.word_dayTime;
+  document.querySelector("#word_paris").textContent = dict.word_paris;
+  document.querySelector("#word_ocean").textContent = dict.word_ocean;
+  document.querySelector("#word_forest").textContent = dict.word_forest;
+  document.querySelector("#word_lang").textContent = dict.word_lang
+  document.querySelector("#word_show").textContent = dict.word_show;
+  document.querySelector("#word_clock").textContent = dict.word_clock;
+  document.querySelector("#word_date").textContent = dict.word_date;
+  document.querySelector("#word_greeting").textContent = dict.word_greeting;
+  document.querySelector("#word_audioplayer").textContent = dict.word_audioplayer;
+  document.querySelector("#word_weather").textContent = dict.word_weather;
+  document.querySelector("#word_quote").textContent = dict.word_quote;
+  document.querySelector("#word_todo").textContent = dict.word_todo;
+  document.querySelector("#word_background").textContent = dict.word_background;
+  document.querySelector("#word_resourse").textContent = dict.word_resourse;
+  document.querySelector("#word_image").textContent = dict.word_image;
 
+}
 //change languge toggle button
 function changeLang(){
   if (settingsToggleLang.classList.contains("off-toggle")) {
@@ -506,10 +548,11 @@ function changeLang(){
     settingsToggleLang.classList.add("off-toggle");
     state.language = "ru";
   } 
-  showTime();
-  getQuotes();
   setLocalStorage();
   getLocalStorage();
+  showTime();
+  getQuotes();
+  translateSettings(state.language);
 }
 settingsToggleLang.addEventListener('click',changeLang)
 
@@ -582,3 +625,40 @@ selectTag.addEventListener("click", (e) => {
   }
   setBackground();
 });
+
+//закрывать окно настроек при клике вне окна
+
+//for greeting and weather - collecting data in storage
+function setLocalStorage() {
+  localStorage.setItem("name", userName.value);
+  localStorage.setItem("city", city.value);
+  localStorage.setItem("settings_lang", state.language);
+  localStorage.setItem("settingsToggle", settingsToggleLang.classList);
+}
+
+//for greeting and weather - getting data from storage
+function getLocalStorage() {
+  if (localStorage.getItem("settingsToggle")) {
+    settingsToggleLang.classList = localStorage.getItem("settingsToggle");
+  }
+  if (localStorage.getItem("settings_lang")) {
+    state.language = localStorage.getItem("settings_lang");
+  }
+  if (localStorage.getItem("name")) {
+    userName.value = localStorage.getItem("name");
+  } else {
+    userName.placeholder = "Enter your name";
+    if (state.language === 'ru'){
+      userName.placeholder = "Ваше имя";
+    }
+  }
+  if (localStorage.getItem("city")) {
+    city.value = localStorage.getItem("city");
+  } else {
+    city.value = "Minsk";
+  }
+}
+window.addEventListener("beforeunload", setLocalStorage);
+window.addEventListener("load", getLocalStorage);
+window.addEventListener("load", translateSettings);
+window.addEventListener("load", getQuotes);

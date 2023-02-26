@@ -216,7 +216,7 @@ select:hover{
   gap: 20px;
 
   /* ! */
-  grid-template-columns: 150px 120px 40px 80px;
+  grid-template-columns: 150px 120px 40px 60px;
   grid-template-rows: 30px;
   align-items: center;
   grid-template-areas:
