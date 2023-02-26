@@ -18,9 +18,24 @@ a {
   color: #fff;
   text-align: center;
   /*background: url("../assets/img/bg.jpg") center/cover, rgba(0, 0, 0, 0.5);*/
+  background-repeat: no-repeat;
+  background-size: cover;
   background-blend-mode: multiply;
   transition: background-image 1s ease-in-out;
 }
+select {
+  font-family: 'Arial', sans-serif;
+  font-size: 16px;
+  color: #58554B;
+  padding: 2px;
+  border: #58554B dotted 1px;
+  cursor: pointer;
+}
+select:active,
+select:hover{
+  border: #58554B dotted 1px;
+}
+
 
 .header {
   display: flex;
@@ -185,7 +200,7 @@ a {
 .settings{
   visibility: hidden;
   position: absolute;
-  bottom: 60px;
+  bottom: 70px;
   background-color: #fff;
   border-radius: 3px;
   opacity: 0.95;
@@ -201,8 +216,8 @@ a {
   gap: 20px;
 
   /* ! */
-  grid-template-columns: 150px 100px 36px 20px;
-  grid-template-rows: 24px;
+  grid-template-columns: 150px 120px 40px 80px;
+  grid-template-rows: 30px;
   align-items: center;
   grid-template-areas:
     "A  B C D"

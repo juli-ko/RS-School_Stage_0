@@ -12,6 +12,8 @@ const userName = document.querySelector(".name");
 const body = document.querySelector("body");
 const slideNext = document.querySelector(".slide-next");
 const slidePrev = document.querySelector(".slide-prev");
+const unsplashKey = "9gGqZUoiILMj2eUKV312mVDhJvGBQ1WjDOv4_N0lutA";
+const flickrKey = "6eb9da38f6635963a23e7f56c541fe18";
 //weather
 const weatherIcon = document.querySelector(".weather-icon");
 const temperature = document.querySelector(".temperature");
@@ -48,6 +50,11 @@ const settingsToggleGreeting = document.querySelector(".greeting-toggle");
 const settingsToggleAudio = document.querySelector(".audio-toggle");
 const settingsToggleWeather = document.querySelector(".weather-toggle");
 const settingsToggleQuote = document.querySelector(".quote-toggle");
+const select = document.querySelector(".select");
+const selectTag = document.querySelector(".select-tag");
+const github = document.querySelector("#github");
+const unsplash = document.querySelector("#unsplash");
+const flickr = document.querySelector("#flickr");
 
 //GLOBAL VARIABLE________________________________________________________________________________________________
 let randomNum = "";
@@ -57,6 +64,7 @@ let playNum = 0;
 let state = {
   language: "en",
   photoSource: "github",
+  query: getTimeOfDay(),
   blocks: ["time", "date", "greeting", "quote", "weather", "audio", "todolist"],
 };
 
@@ -148,16 +156,49 @@ function getLocalStorage() {
 window.addEventListener("beforeunload", setLocalStorage);
 window.addEventListener("load", getLocalStorage);
 
-//for background - show backgroud when image is onloaded
-function setBackground() {
-  const img = new Image();
-  img.src = `https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${getTimeOfDay()}/${randomNum}.jpg`;
+//for background ************************************************************************************************************************************ 
+//get image on unsplash
+const img = new Image();
+async function getLinkToImageUnsplash() {
+  const url = `https://api.unsplash.com/photos/random?orientation=landscape&query=${state.query}&client_id=${unsplashKey}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  console.log(data.urls.regular);
+  img.src = data.urls.regular;
+  img.onload = () => {
+    body.style.backgroundImage = `url(${img.src})`;
+  }
+}
+//get image on flickr
+async function getLinkToImageFlickr(){
+  const url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${flickrKey}&tags=${state.query}&extras=url_l&format=json&nojsoncallback=1`;
+  const res = await fetch(url);
+  const data = await res.json();
+  console.log(data)
+  img.src = data.photos.photo[Math.round(Math.random() * data.photos.photo.length)].url_l;
   img.onload = () => {
     body.style.backgroundImage = `url(${img.src})`;
   };
 }
 
-//for background - fuctions for flipping image which order equal to randomNum
+//show backgroud when image is onloaded
+function setBackground() {
+  console.log(state.photoSource)
+  if ((state.photoSource === "github")) {
+    img.src = `https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${getTimeOfDay()}/${randomNum}.jpg`;
+    img.onload = () => {
+      body.style.backgroundImage = `url(${img.src})`;
+    };
+  }
+  if (state.photoSource === "unsplash") {
+    getLinkToImageUnsplash();
+  }
+  if (state.photoSource === "flickr") {
+    getLinkToImageFlickr();
+  }
+}
+
+//fuctions for flipping image which order equal to randomNum
 function getSlideNext() {
   if (randomNum === "20") {
     randomNum = "1";
@@ -176,7 +217,6 @@ function getSlidePrev() {
   }
   setBackground();
 }
-
 setBackground();
 slideNext.addEventListener("click", getSlideNext);
 slidePrev.addEventListener("click", getSlidePrev);
@@ -483,7 +523,6 @@ function hideWidget(button, block){
     block.style.opacity = 0;
   } 
 }
-
 //hide-open Clock
 settingsToggleClock.addEventListener('click',()=>{
   hideWidget(settingsToggleClock, timeOnPage);
@@ -507,4 +546,39 @@ settingsToggleWeather.addEventListener("click", () => {
 //hide-open Quote
 settingsToggleQuote.addEventListener("click", () => {
   hideWidget(settingsToggleQuote, document.querySelector(".quote-block"));
+});
+
+//select image resourse
+selectTag.style.visibility = "hidden";
+
+select.addEventListener("change", (e) => {
+  if (e.target.value === "github") {
+    unsplash.classList.add("hidden");
+    flickr.classList.add("hidden");
+    state.photoSource = "github";
+    selectTag.style.visibility = 'hidden'
+  }
+  if (e.target.value === "unsplash") {
+    unsplash.classList.remove("hidden");
+    flickr.classList.add("hidden");
+    state.photoSource = "unsplash";
+    selectTag.style.visibility = "visible";
+  }
+  if (e.target.value === "flickr") {
+    flickr.classList.remove("hidden");
+    unsplash.classList.add("hidden");
+    state.photoSource = "flickr";
+    selectTag.style.visibility = "visible";
+  }
+  setBackground();
+});
+
+//select tag
+selectTag.addEventListener("click", (e) => {
+  if (e.target.value === "time of day") {
+    state.query = getTimeOfDay();
+  }else{
+    state.query = e.target.value;
+  }
+  setBackground();
 });
