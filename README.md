@@ -1,1 +1,1 @@
-https://juli-ko-JSFEPRESCHOOL2022Q4.github.io/plants-part3/
+https://rolling-scopes-school.github.io/juli-ko-JSFEPRESCHOOL2022Q4/plants/
