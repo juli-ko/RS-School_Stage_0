@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="assets/favicon.ico" rel="shortcut icon" />
+  <link rel="stylesheet" href="css/owfont-regular.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <title>momentum</title>
+</head>
+<body>
+  <header class="header">
+    <div class="player">
+      <div class="song-name">         </div>
+      <div class="player-controls">
+        <button class="play-prev player-icon"></button>
+        <button class="play player-icon"></button>
+        <button class="play-next player-icon"></button>
+        <div class="progress-bar">
+          <div class="duration-player">
+            <div class="progress"></div>
+          </div>
+          <div class="duration-timer">
+            <div class="current">0:00</div>
+            <div class="divider">/</div>
+            <div class="length">0:00</div>
+          </div>
+        <button class="volume-button volume-on"></button>
+        <div class="volume-slider">
+          <div class="volume-percentage"></div>  
+        </div>
+        </div>
+      </div>
+      <ul class="play-list"></ul>
+    </div>
+    <div class="weather">
+      <input type="text" class="city" />
+      <i class="weather-icon owf"></i>
+      <div class="weather-error"></div>
+      <div class="description-container">
+        <span class="temperature"></span>
+        <span class="weather-description"></span>
+      </div>
+      <div class="wind">
+        <span class="wind-description"></span>
+      </div>
+      <div class="humidity">
+        <span class="humidity-description"></span>
+      </div>
+    </div>
+  </header>
+  <main class="main">
+    <div class="slider-icons">
+      <button class="slide-prev slider-icon"></button>
+      <button class="slide-next slider-icon"></button>
+    </div>
+    <time class="time"></time>
+    <date class="date"></date>
+    <div class="greeting-container">
+      <span class="greeting"></span>
+      <input type="text" class="name" />
+    </div>
+  </main>
+  <footer class="footer">
+    <button class="settings-button"></button>
+    <div class="settings">
+      <div class="settings-row dotted">
+        <h2 class="A" id="word_lang">Language:</h2>
+        <span class="B">eng</span>
+        <div class="settigs-toggle languge-toggle C">
+          <div class="circle"></div>
+        </div>
+        <span class="D">ru</span>
+      </div>
+      <div class="settings-row">
+        <h2 class="A" id = "word_show">Show panel:</h2>
+        <span class="B" id = "word_clock">Clock:</span>
+        <div class="settigs-toggle clock-toggle C">
+          <div class="circle"></div>
+        </div>  
+      </div>
+      <div class="settings-row">
+        <span class="B" id ='word_date'>Date:</span>
+        <div class="settigs-toggle date-toggle C">
+          <div class="circle"></div>
+        </div>  
+      </div>
+      <div class="settings-row">
+        <span class="B" id="word_greeting">Greeting:</span>
+        <div class="settigs-toggle greeting-toggle C">
+          <div class="circle"></div>
+        </div>  
+      </div>
+      <div class="settings-row">
+        <span class="B" id ="word_audioplayer">Audio player:</span>
+        <div class="settigs-toggle audio-toggle C">
+          <div class="circle"></div>
+        </div>  
+      </div>
+      <div class="settings-row">
+        <span class="B" id="word_weather">Weather:</span>
+        <div class="settigs-toggle weather-toggle C">
+          <div class="circle"></div>
+        </div>  
+      </div>
+      <div class="settings-row">
+        <span class="B" id="word_quote">Quote:</span>
+        <div class="settigs-toggle quote-toggle C">
+          <div class="circle"></div>
+        </div>  
+      </div>
+      <div class="settings-row dotted">
+        <span class="B" id="word_todo">ToDo List:</span>
+        <div class="settigs-toggle todo-toggle C">
+          <div class="circle"></div>
+        </div>  
+      </div>
+      <div class="settings-row">
+          <h2 class="A" id="word_background">Background:</h2>
+          <span class="B" id="word_resourse">Image resource:</span>
+          <div class="selection-block C">
+            <select class="select">
+              <option id="github">github</option>
+              <option id="unsplash">unsplash</option>
+              <option id="flickr">flickr</option>
+            </select>
+          </div>
+        </div>
+      <div class="settings-row select-tag">
+          <span class="B" id="word_image">Image tag:</span>
+          <div class="selection-block C">
+            <select class="select ">
+              <option id="word_dayTime">time of day</option>
+              <option id="word_paris">paris</option>   
+              <option id="word_ocean">ocean</option>
+              <option id="word_forest">forest</option> 
+            </select>
+          </div>
+        </div>
+    </div>
+    <div class="quote-block">
+      <button class="change-quote"></button>
+      <div>
+        <div class="quote"></div>
+        <div class="author"></div>
+      </div>
+    </div>
+    <div class="info-block">
+        <div class="info-block"><a href="https://rs.school/">RS School</a></div>
+        <span class="info-block year"> 2023 </span>
+        <a href="https://github.com/juli-ko?tab=overview&from=2023-02-01&to=2023-02-25"><div class="info-block github"></div></a>
+    </div>
+  </footer>
+  <script src="src/js/script.js" type="module"></script>
+</body>
+</html>
